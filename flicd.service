@@ -1,8 +1,7 @@
 [Unit]
-Description=Home Assistant
-After=docker.service hass-extras-rest.service zoneminder.service
+Description=flic button daemon
+After=docker.service
 Requires=docker.service
-Wants=hass-extras-rest.service zoneminder.service
 
 [Service]
 Environment="CONTAINER=pschmitt/flicd"
