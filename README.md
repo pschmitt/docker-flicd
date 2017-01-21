@@ -3,7 +3,7 @@
 ## Usage
 
 ```
-docker run -it --rm --privileged --net=host -v $PWD/config:/config pschmitt/flicd
+docker run -it --rm --cap-add NET_ADMIN --net=host -v $PWD/config:/config pschmitt/flicd
 ```
 
 ## Notes
