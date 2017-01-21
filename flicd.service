@@ -1,0 +1,21 @@
+[Unit]
+Description=Home Assistant
+After=docker.service hass-extras-rest.service zoneminder.service
+Requires=docker.service
+Wants=hass-extras-rest.service zoneminder.service
+
+[Service]
+Environment="CONTAINER=pschmitt/flicd"
+Environment="CONTAINER_NAME=flicd"
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill ${CONTAINER_NAME}
+ExecStartPre=-/usr/bin/docker rm ${CONTAINER_NAME}
+ExecStart=/usr/bin/docker run --name ${CONTAINER_NAME} \
+  --privileged \
+  --net=host \
+  -v /srv/flicd/config:/config \
+  ${CONTAINER}
+ExecStop=/usr/bin/docker stop ${CONTAINER_NAME}
+
+[Install]
+WantedBy=multi-user.target
